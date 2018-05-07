@@ -12,5 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
+});
+
+Auth::routes();
+
+$this->group(['middleware' => ['auth']/*, 'namespace' => 'Painel', 'prefix' => 'painel'*/], function (){
+
+	//dashboard
+	$this->get('/', 'HomeController@index');
+
+	//contatos
+	$this->get('contatos', 'ContatoController@index')->name('contatos.index');
+	$this->get('contatos/novo', 'ContatoController@novo')->name('contatos.novo');
+	$this->post('contatos', 'ContatoController@store')->name('contatos.store');
+
 });
