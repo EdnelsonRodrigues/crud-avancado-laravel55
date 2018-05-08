@@ -20,12 +20,12 @@
                     {{ csrf_field() }}
                         <div class="form-group form-group-sm">
                             <label>Nome</label>
-                            <input type="text" name="nome" class="form-control input-sm">
+                            <input type="text" name="nome" class="form-control input-sm" value="{{ old('nome') }}">
                         </div>
 
                         <div class="form-group form-group-sm">
                             <label>Celular</label>
-                            <input type="text" name="celular" class="form-control input-sm">
+                            <input type="text" name="celular" class="form-control input-sm" value="{{ old('celular') }}">
                         </div>
 
                         <div class="form-group form-group-sm">
