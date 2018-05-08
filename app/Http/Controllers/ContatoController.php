@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ContatoFormRequest;
 use App\Contato;
 
 class ContatoController extends Controller
 {
-    public function index()
+    public function index(Contato $contato)
     {
-    	$contatos = Contato::all();
-    	return view('contatos.index', compact('contatos'));
+		$contatos = $contato->listar();
+		//dd($contatos);
+		return view('contatos.index', compact('contatos'));
     }
 
     public function novo()
@@ -18,18 +20,10 @@ class ContatoController extends Controller
     	return view('contatos.novo');
     }
 
-    public function store(Request $request, Contato $contato)
+    public function store(ContatoFormRequest $request, Contato $contato)
 	{
-
-		$val = $this->validate($request, [
-			'nome' => 'required',
-			'celular' => 'required',
-			'descricao' => 'required'
-		]);
-
-		//dd($contato->salvar($val));
-
-		$result = $contato->salvar($val);
+		//dd($contato->salvar($request->all()));
+		$result = $contato->salvar($request->all());
 
 		//mostrar a mensagem para o usuario na view index
 		if ($result['success'])

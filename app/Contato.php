@@ -8,20 +8,32 @@ use DB;
 class Contato extends Model
 {
     protected $fillable = [
+			'status',
             'nome',
             'celular',
             'descricao'
-    ];
+	];
+	
+	//metodo para listar todos os contatos ativos
+	public function listar()
+	{
+		DB::beginTransaction();
+		//dd($contatos = Contato::where('status','Ativo')->get());
+		$contatos = Contato::where('status','Ativo')->get();
+		return $contatos;
+	}
 
     //metodo para salvar um contato com transação no banco
     public function salvar($contato)
     {
+		//dd($contato);
     	DB::beginTransaction();
 
     	$contato = Contato::create([
-    		'nome' => $_POST["nome"],
-    		'celular' => $_POST["celular"],
-    		'descricao' => $_POST["descricao"]
+			'status' => 'Ativo',
+    		'nome' => $contato['nome'],
+    		'celular' => $contato['celular'],
+    		'descricao' => $contato['descricao']
     	]);
 
 		if($contato) {

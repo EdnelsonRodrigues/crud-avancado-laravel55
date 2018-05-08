@@ -13,24 +13,7 @@
                 </div>
 
                 <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-
-                    <!-- mensagem de erro -->
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                    <!-- fim mensagem de erro -->
+                    @include('includes.alerts')
 
                     <!-- form para adiconar novo contato -->
                     <form action="{{ route('contatos.store') }}" method="POST">

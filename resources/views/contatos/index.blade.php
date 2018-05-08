@@ -13,11 +13,8 @@
                 </div>
 
                 <div class="panel-body">
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                    @include('includes.alerts')
+					
 
                    	<!-- table striped -->
                    	<table class="table table-striped table-condensed">
